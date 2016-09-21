@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News - mean</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="webapp" ng-controller="NewsController">
+    <div class="container">
+        <h1 class="text-center">新闻列表1111111</h1>
+        <table class="table-hover table" style="width: 100%">
+            <tbody>
+                <tr class="row" ng-repeat="news in list" style="font-size: 20px;">
+                    <td class="col-sm-3">
+                        <small ng-bind="formatTime(news.createTime)"></small>
+                    </td>
+                    <td class="col-sm-9">
+                        <span>{{news.title}}</span>
+                        <span style="float: right;">
+                            [<a href="javascript:void(0)" ng-click="openNewsDetail(news._id)">查看</a>]
+                            [<a href="javascript:void(0)" ng-click="NewsUpdate(news._id)">修改</a>]
+                            [<a href="javascript:void(0)" ng-click="NewsDelete(news._id)">删除</a>]
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="modal-detail">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 ng-bind="current.title"></h1>
+                        <span ng-bind="formatTime(current.createTime)"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-bind="current.content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-detail-update">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>修改</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="current.title"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">content</label>
+                                <div class="col-sm-10">
+                                    <textarea name="" cols="30" rows="10" class="form-control" ng-model="current.content" placeholder="new content"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-primary" ng-click="update()">save</button>
+                                    <span class="help-inline text-danger" ng-bind="editorMessage"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-editor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>news editor</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="new.title" placeholder="new title"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">content</label>
+                                <div class="col-sm-10">
+                                    <textarea name="" id="" cols="30" rows="10" class="form-control" ng-model="new.content" placeholder="new content"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-primary" ng-click="save()">save</button>
+                                    <span class="help-inline text-danger" ng-bind="editorMessage"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="createNews()" style="margin-top: 10px;">新增新闻</button>
+
+    </div>
+
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script><script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="lib/moment/moment.js"></script>
+    <script type="text/javascript" src="webApp.js"></script>
+    <script type="text/javascript" src="servers/news.client.service.js"></script>
+    <script type="text/javascript" src="controllers/news.client.controller.js"></script>
+    <script type="text/javascript" src="controllers/news.client.controller.js"></script>
+</body>
+</html>
